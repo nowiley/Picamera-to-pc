@@ -30,11 +30,9 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_address = ('192.168.50.36', 8000) # IP, PORT
 sock.connect(server_address)
 
-
 ######################
 # RECEIVE, SHOW, PUB #
 ######################
-
 
 # Receive the data in small chunks and reassemble it
 data = b""
