@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  controls:
+    tty: true
+    container_name: "controls"
+    privileged: true
+    network_mode: host
+    restart: always
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    devices:
+      - "/dev/mem:/dev/mem"
+      - "/dev/gpiomem:/dev/gpiomem"
+    volumes:
+      - /sys:/sys
+      - /dev:/dev
+
+
