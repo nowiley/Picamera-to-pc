@@ -1,0 +1,8 @@
+prefix=/home/lean/test_remote_docker/test_remote_ws/install
+
+Name: test_remote
+Description: Description of test_remote
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

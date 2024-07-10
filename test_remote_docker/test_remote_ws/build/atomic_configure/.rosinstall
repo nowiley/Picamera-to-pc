@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/lean/test_remote_docker/test_remote_ws/devel/setup.sh

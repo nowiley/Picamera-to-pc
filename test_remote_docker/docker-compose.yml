@@ -1,0 +1,16 @@
+services:
+  test_container:
+    tty: true
+    container_name: test_remote_cont
+    privileged: true
+    network_mode: host
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    devices:
+      - "/dev/mem:/dev/mem"
+      - "/dev/gpiomem:/dev/gpiomem"
+    volumes:
+      - /sys:/sys
+      - /dev:/dev
+    command: ["bash", "-c", "source /home/app/test_remote_ws/devel/setup.bash && rosrun test_remote talker.py"]
