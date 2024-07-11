@@ -6,7 +6,7 @@
 FROM ros:noetic 
 
 # Define env variables
-ENV ROS_MASTER_URI=http://192.168.50.145:11311
+ENV ROS_MASTER_URI=http://192.168.50.193:11311
 ENV ROS_IP=192.168.50.36
 ENV ROS_WS=/home/app/lean_ws-main 
 
@@ -30,25 +30,15 @@ adafruit-circuitpython-typing==1.10.1 \
 RPi.GPIO
 
 # Set the working directory
-WORKDIR /home/app
+WORKDIR /home/app/lean_ws-main
 
 # Copy contents of lean_ws-main to the container
-COPY lean_ws-main /home/app/lean_ws-main
-
-# # Set up SSH server
-# RUN mkdir /var/run/sshd
-# RUN echo 'root:root' | chpasswd
-# RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
-# RUN sed -i 's/#PermitRootLogin yes/PermitRootLogin yes/' /etc/ssh/sshd_config
-# RUN mkdir /root/.ssh
-# COPY vm_pub_key.pub /root/.ssh/authorized_keys
+COPY ../../lean_ws-main /home/app/lean_ws-main
 
 # Source ROS setup
-RUN echo "source /opt/ros/noetic/setup.bash" >> /root/.bashrc
-RUN echo "source /app/lean_ws-main/devel/setup.bash" >> /root/.bashrc
+RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+RUN echo "source /home/app/lean_ws-main/devel/setup.bash" >> ~/.bashrc
+RUN rm -r build/
 
 # Build the ROS workspace
-RUN cd /home/app/lean_ws-main && catkin_make
-
-# Start SSH server
-# CMD ["/usr/sbin/sshd", "-D"]
+RUN . /opt/ros/noetic/setup.sh && catkin_make

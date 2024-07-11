@@ -16,5 +16,6 @@ services:
     volumes:
       - /sys:/sys
       - /dev:/dev
+    command: ["bash", "-c", "source /home/app/lean_ws-main/devel/setup.bash && roslaunch controller pi_car_joy.launch"]
 
 
