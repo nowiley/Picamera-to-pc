@@ -1,6 +1,12 @@
 # Picamera-to-pc
  Repo for a python, picamera2, and socket streaming platform between a raspberry pi to a pc over wifi network
 
+## Goals:
+* Integrate vision to LEAN robots
+* Maintain existing functionality and minimal workflow changes
+* Official support for ROS and essential libraries
+* Simple and few "hacks"
+
 ---
 
 ## How this repo works: /controls_docker and /host

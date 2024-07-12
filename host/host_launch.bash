@@ -9,21 +9,21 @@ echo "Launching local listener node in a new terminal..."
 gnome-terminal -- bash -c "
 source /opt/ros/noetic/setup.bash
 source ~/Picamera-to-pc/lean_ws-main/devel/setup.bash
-roslaunch controller host_car_joy.launch;
 echo "Started Listener Node"
+roslaunch controller host_car_joy.launch;
 exec bash"
 
 echo "Starting SSH session to bean@192.168.50.36 ..."
 
+# SSH into remote Raspberry Pi and run docker-compose in controls_docker/docker-compose.yml
+# This will launch remote ros nodes
 ssh bean@192.168.50.36 << 'EOF'
 
 echo "Connected to remote"
 
-pwd
-
 echo "Changing directory to /home/bean/Picamera-to-pc/pi/controls_docker..."
 cd /home/bean/Picamera-to-pc/pi/controls_docker
-pwd
+
 if [ $? -eq 0 ]; then
     echo "Successfully changed directory."
 else
