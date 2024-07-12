@@ -7,8 +7,10 @@ import cv2
 import socket
 import numpy as np
 import rospy
+import os
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
+
 
 #####################
 # SETUP ROS AND TCP #
@@ -27,6 +29,7 @@ bridge = CvBridge()
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Connect the socket to the port where the server is listening
+ros_remote_ip = os.environ['ROS_IP']
 server_address = ('192.168.50.36', 8000) # IP, PORT
 sock.connect(server_address)
 
@@ -62,4 +65,6 @@ while not rospy.is_shutdown():
         else:
             break
 
+# Clean up the connection
+sock.close()
 cv2.destroyAllWindows()
