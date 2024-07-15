@@ -20,7 +20,7 @@ from cv_bridge import CvBridge
 rospy.init_node('image_streamer')
 
 # Create a publisher for the image topic
-image_pub = rospy.Publisher("camera/image", Image, queue_size=10)
+image_pub = rospy.Publisher("camera/image", Image, queue_size=1)
 
 # Create a CvBridge object for converting between OpenCV images and ROS image messages
 bridge = CvBridge()
@@ -58,7 +58,7 @@ while not rospy.is_shutdown():
             image_msg = bridge.cv2_to_imgmsg(frame, "bgr8")
             image_pub.publish(image_msg)
 
-            cv2.imshow('Frame', frame)
+            cv2.imshow('TCP Frame', frame)
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
             start = 0
